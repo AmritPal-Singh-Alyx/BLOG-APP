@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { DUMMY_POSTS } from "./config";
 import { PostItems } from "./index.js";
+import { GiH2O } from "react-icons/gi";
 
 
 const Posts = () => {
@@ -13,11 +14,22 @@ const Posts = () => {
     return (
 
         <section>
-            <div className="container posts__container">
+
+
+            {posts.length > 0 ? <div className="container posts__container">
                 {
-                    posts.map(post => (<PostItems key={post.id} postID={post.id} thumbnail={post.thumbnail} category={post.category} title={post.title} description={post.desc} authorID={post.authorID} />))
+                    posts.map(post =>
+                    (<PostItems
+                        key={post.id} p
+                        ostID={post.id}
+                        thumbnail={post.thumbnail}
+                        category={post.category}
+                        title={post.title}
+                        description={post.desc}
+                        authorID={post.authorID}
+                    />))
                 }
-            </div>
+            </div> : <h2 className="center">No Posts Found </h2>}
         </section>
     )
 }

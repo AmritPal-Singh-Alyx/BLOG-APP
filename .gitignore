@@ -5,3 +5,10 @@
 node_modules/
 
 
+#ignore all the dist files
+
+dist/
+
+#ignore all the parcel-cache files
+
+.parcel-cache/
