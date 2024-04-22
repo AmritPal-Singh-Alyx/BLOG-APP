@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { DUMMY_POSTS } from "./config";
 import { PostItems } from "./index.js";
-import { GiH2O } from "react-icons/gi";
+
 
 
 const Posts = () => {
@@ -13,7 +13,7 @@ const Posts = () => {
 
     return (
 
-        <section>
+        <section className="posts">
 
 
             {posts.length > 0 ? <div className="container posts__container">
