@@ -5,6 +5,8 @@ import Thumbnail2 from "../utils/thumbnail2.jpg";
 import Thumbnail3 from "../utils/thumbnail3.jpg";
 import Thumbnail4 from "../utils/thumbnail4.jpg"
 
+import Avatar1 from "../utils/avatar.jpg"
+
 
 export const DUMMY_POSTS = [
 
@@ -50,3 +52,22 @@ export const DUMMY_POSTS = [
     },
 ]
 
+
+
+export const AuthorsData = [
+    {
+        id: 1, avatar: Avatar1, name: "Amritpal Singh", posts: 5
+    },
+    {
+        id: 2, avatar: Avatar1, name: "Kritik Manav", posts: 0
+    },
+    {
+        id: 3, avatar: Avatar1, name: "Deepansh Gupta", posts: 3
+    },
+    {
+        id: 4, avatar: Avatar1, name: "Aryan Rawat", posts: 2
+    },
+    {
+        id: 5, avatar: Avatar1, name: "Kavan Patel", posts: 1
+    },
+]
