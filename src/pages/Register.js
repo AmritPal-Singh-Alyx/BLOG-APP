@@ -29,7 +29,7 @@ const Register = () => {
                 <form className="form register__form">
                     <p className="form__error-message">This is an error message</p>
 
-                    <input type="text" name="name" placeholder="Full name" value={userData.name} onChange={changeInputHandler} />
+                    <input type="text" name="name" placeholder="Full name" value={userData.name} onChange={changeInputHandler} autoFocus />
 
                     <input type="text" name="email" placeholder="Email" value={userData.email} onChange={changeInputHandler} />
 
