@@ -38,7 +38,7 @@ const Header = () => {
     return (
         <nav>
             <div className="container nav__container">
-                <Link to="/" className="nav__logo" onClick={navCloseHandler} >
+                <Link to="/" className="nav__logo" onClick={() => { window.scroll(0, 0); navCloseHandler() }} >
                     <img src={Logo} alt="Blog Logo" />
                 </Link>
                 {isShowingNav && <ul className="nav__menu">
