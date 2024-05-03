@@ -20,7 +20,7 @@ const CreatePosts = () => {
 
     return (
 
-        <section className="create__post">
+        <section className="create-post">
             <div className="container">
                 <h2>Create Post</h2>
                 <p className="form__error-message">This is an error message</p>
@@ -35,7 +35,8 @@ const CreatePosts = () => {
                     </select>
 
                     <ReactQuill modules={modules} formats={formats} value={description} onChange={setDescription} />
-                    <input type="file" value={thumbnail} onChange={e => setThumbnail(e.target.files[0])} />
+
+                    <input type="file" onChange={e => setThumbnail(e.target.files[0])} accept="png, jpg, jpeg" />
 
                     <button type="submit" className="btn primary"> Create</button>
 

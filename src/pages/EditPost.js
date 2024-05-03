@@ -20,7 +20,7 @@ const EditPost = () => {
 
     return (
 
-        <section className="create__post">
+        <section className="create-post">
             <div className="container">
                 <h2>Edit Post</h2>
                 <p className="form__error-message">This is an error message</p>
