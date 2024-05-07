@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const Header = () => {
 
 
-    const [isShowingNav, setIsShowingNav] = useState(false);
+    const [isShowingNav, setIsShowingNav] = useState(window.innerWidth > 800);
 
 
     useEffect(() => {
@@ -29,9 +29,6 @@ const Header = () => {
 
         if (window.innerWidth < 800) {
             setIsShowingNav(false);
-        }
-        else {
-            setIsShowingNav(true)
         }
     }
 
