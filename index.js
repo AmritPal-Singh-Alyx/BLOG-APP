@@ -9,13 +9,15 @@ import ErrorPage from './src/pages/ErrorPage.js'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import UserProvider from './src/context/UserContext.js';
+
 
 
 const router = createBrowserRouter([
 
     {
         path: '/',
-        element: <AppLayout />,
+        element: <UserProvider><AppLayout /></UserProvider>,
         errorElement: <ErrorPage />,
         children: [
             { index: true, element: <Home /> },

@@ -25,9 +25,6 @@ const Register = () => {
         setError('');
 
         try {
-            console.log("Registering user with data:", userData);
-            console.log("Base URL:", process.env.REACT_APP_BASE_URL);
-
             const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData);
             const newUser = response.data;
             console.log("New user:", newUser);
@@ -55,9 +52,9 @@ const Register = () => {
 
                     <input type="text" name="email" placeholder="Email" value={userData.email} onChange={changeInputHandler} />
 
-                    <input type="password" name="password" placeholder="Password" value={userData.password} onChange={changeInputHandler} autoComplete="new-password" />
+                    <input type="password" name="password" placeholder="Password" value={userData.password} onChange={changeInputHandler} />
 
-                    <input type="password" name="password2" placeholder="Confirm Password" value={userData.password2} onChange={changeInputHandler} autoComplete="new-password" />
+                    <input type="password" name="password2" placeholder="Confirm Password" value={userData.password2} onChange={changeInputHandler} />
 
                     <button type="submit" className="btn primary">Register</button>
                 </form>
