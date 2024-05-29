@@ -1,15 +1,24 @@
 
 import { DUMMY_POSTS } from '../components/config';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 
 
 const Dashboard = () => {
 
     const [posts, setPost] = useState(DUMMY_POSTS);
+    const { currentUser } = useContext(UserContext);
+    const navigate = useNavigate()
 
+    const token = currentUser?.token;
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/login")
+        }
+    }, [])
 
     return (
         <section className='dashboard'>

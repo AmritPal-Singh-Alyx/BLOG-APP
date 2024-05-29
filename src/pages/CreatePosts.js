@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { modules, formats, POST_CATEGORIES } from "../components/config"
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { UserContext } from "../context/UserContext";
+import { redirect, useNavigate } from "react-router-dom";
 
 
 
@@ -17,7 +19,16 @@ const CreatePosts = () => {
     const [thumbnail, setThumbnail] = useState("");
     const [description, setDescription] = useState("");
 
+    const { currentUser } = useContext(UserContext);
+    const token = currentUser?.token;
+    const navigate = useNavigate();
 
+    //  redirect to login page for any user who isn't logged in
+    useEffect(() => {
+        if (!token) {
+            navigate("/login")
+        }
+    }, [])
     return (
 
         <section className="create-post">
