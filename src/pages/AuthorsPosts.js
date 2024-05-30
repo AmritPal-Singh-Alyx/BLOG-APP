@@ -12,15 +12,15 @@ const AuthorsPost = () => {
 
             {posts.length > 0 ? <div className="container posts__container">
                 {
-                    posts.map(post =>
+                    posts.map(({ _id: id, thumbnail, category, title, description, creator, createdAt }) =>
                     (<PostItems
-                        key={post.id}
-                        postID={post.id}
-                        thumbnail={post.thumbnail}
-                        category={post.category}
-                        title={post.title}
-                        description={post.desc}
-                        authorID={post.authorID}
+                        key={id}
+                        postID={id}
+                        thumbnail={thumbnail}
+                        category={category}
+                        title={title}
+                        description={description}
+                        authorID={creator}
                     />))
                 }
             </div> : <h2 className="center">No Posts Found </h2>}
