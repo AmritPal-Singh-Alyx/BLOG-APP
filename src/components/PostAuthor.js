@@ -1,20 +1,17 @@
-
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
 
-// import en from "javascript-time-ago/en"
-// import ru from "javascript-time-ago/ru";
+import en from "javascript-time-ago/locale/en.json"
+import ru from "javascript-time-ago/locale/ru.json";
 
-// TimeAgo.addDefaultLocale(en);
-// TimeAgo.addDefaultLocale(ru);
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addDefaultLocale(ru);
 
 const PostAuthor = ({ createdAt, authorID }) => {
-
     const [author, setAuthor] = useState({});
-
 
     useEffect(() => {
         const getAuthor = async () => {
@@ -24,23 +21,34 @@ const PostAuthor = ({ createdAt, authorID }) => {
             }
             try {
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/${authorID}`);
-                console.log(response?.data)
                 setAuthor(response?.data);
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                console.log(error);
             };
         }
         getAuthor();
-    }, [])
+    }, [authorID]);
+
+    // Check if createdAt is a valid date
+    const createdAtDate = new Date(createdAt);
+    if (isNaN(createdAtDate.getTime())) {
+        console.error("Invalid createdAt value:", createdAt);
+    }
 
     return (
-        <Link to="/posts/users/sdfsdf" className="post__author">
+        <Link to={`posts/users/${authorID}`} className="post__author">
             <div className="post__author-avatar">
                 <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${author?.avatar}`} alt="avatar" />
             </div>
             <div className="post__author-details">
                 <h5>By: {author?.name}</h5>
-                <small><ReactTimeAgo date={new Date(createdAt)} locale="en-US" /></small>
+                <small>
+                    {!isNaN(createdAtDate.getTime()) ? (
+                        <ReactTimeAgo date={createdAtDate} locale="en-US" />
+                    ) : (
+                        <span>Invalid date</span>
+                    )}
+                </small>
             </div>
         </Link>
     )
