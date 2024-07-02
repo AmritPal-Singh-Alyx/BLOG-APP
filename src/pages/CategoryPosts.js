@@ -1,11 +1,40 @@
 
+import { useParams } from "react-router-dom";
 import { PostItems } from "../components";
-import { useState } from "react";
-import { DUMMY_POSTS } from "../components/config";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Loader from "../components/Loader";
+
 
 const CategoryPosts = () => {
 
-    const [posts, setPosts] = useState(DUMMY_POSTS)
+    const { category } = useParams();
+    const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            setIsLoading(true);
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/categories/${category}`);
+                setPosts(response?.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setIsLoading(false);
+        }
+
+        fetchPosts();
+    }, [])
+
+
+
+    if (isLoading) {
+        return <Loader />
+    }
+
+
     return (
         <section className="posts">
 
@@ -19,8 +48,9 @@ const CategoryPosts = () => {
                         thumbnail={post.thumbnail}
                         category={post.category}
                         title={post.title}
-                        description={post.desc}
+                        description={post.description}
                         authorID={post.authorID}
+                        createdAt={post.createdAt}
                     />))
                 }
             </div> : <h2 className="center">No Posts Found </h2>}
