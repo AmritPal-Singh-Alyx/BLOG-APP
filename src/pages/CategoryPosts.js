@@ -41,16 +41,16 @@ const CategoryPosts = () => {
 
             {posts.length > 0 ? <div className="container posts__container">
                 {
-                    posts.map(post =>
+                    posts.map(({ _id: id, thumbnail, category, title, description, creator, createdAt }) =>
                     (<PostItems
-                        key={post.id}
-                        postID={post.id}
-                        thumbnail={post.thumbnail}
-                        category={post.category}
-                        title={post.title}
-                        description={post.description}
-                        authorID={post.authorID}
-                        createdAt={post.createdAt}
+                        key={id}
+                        postID={id}
+                        thumbnail={thumbnail}
+                        category={category}
+                        title={title}
+                        description={description}
+                        authorID={creator}
+                        createdAt={createdAt}
                     />))
                 }
             </div> : <h2 className="center">No Posts Found </h2>}
