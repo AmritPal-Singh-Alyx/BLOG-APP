@@ -3,7 +3,8 @@ import { modules, formats, POST_CATEGORIES } from "../components/config"
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios"
 
 
 
@@ -17,6 +18,9 @@ const EditPost = () => {
     const [category, setCategory] = useState("Uncategorized");
     const [thumbnail, setThumbnail] = useState("");
     const [description, setDescription] = useState("");
+    const [error, setError] = useState("");
+
+    const { id } = useParams();
 
     const { currentUser } = useContext(UserContext);
     const token = currentUser?.token;
@@ -30,13 +34,49 @@ const EditPost = () => {
     }, [])
 
 
+    useEffect(() => {
+        const getPost = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${id}`);
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getPost();
+    }, [])
+
+    const editPost = async (e) => {
+        e.preventDefault();
+        setError('')
+
+        const postData = new FormData();
+        postData.set('title', title);
+        postData.set('description', description);
+        postData.set('category', category);
+        postData.set('thumbnail', thumbnail);
+
+        try {
+            const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, postData, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } });
+
+            if (response.status == 200) {
+                return navigate('/');
+            }
+        } catch (err) {
+            setError(err.response?.data?.message);
+        }
+    }
+
+
+
     return (
 
         <section className="create-post">
             <div className="container">
                 <h2>Edit Post</h2>
-                <p className="form__error-message">This is an error message</p>
-                <form className="form create-post__form">
+                {error && <p className="form__error-message" >{error}</p>}
+                <form className="form create-post__form" onSubmit={editPost}>
 
                     <input type="text" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} autoFocus />
 
