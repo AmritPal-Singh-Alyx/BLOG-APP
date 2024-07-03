@@ -24,7 +24,7 @@ const AuthorsPost = () => {
             setIsLoading(false);
         }
         fetchPosts();
-    }, []);
+    }, [id]);
 
 
 

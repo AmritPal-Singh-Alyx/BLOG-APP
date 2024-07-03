@@ -26,7 +26,7 @@ const CategoryPosts = () => {
         }
 
         fetchPosts();
-    }, [])
+    }, [category])
 
 
 
