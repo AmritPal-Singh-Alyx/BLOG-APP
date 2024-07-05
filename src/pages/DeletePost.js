@@ -39,6 +39,10 @@ const DeletePost = ({ postId: id }) => {
         }
     };
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <Link className="btn sm danger" onClick={removePost}>Delete</Link>
     );
