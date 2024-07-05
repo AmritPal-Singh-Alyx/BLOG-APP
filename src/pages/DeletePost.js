@@ -1,9 +1,12 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const DeletePost = ({ postId: id }) => {
+
+    const [isLoading, setIsloading] = useState(false);
     const { currentUser } = useContext(UserContext);
     const token = currentUser?.token;
     const navigate = useNavigate();
@@ -17,7 +20,7 @@ const DeletePost = ({ postId: id }) => {
     }, [token, navigate]);
 
     const removePost = async (e) => {
-        e.preventDefault();
+        setIsloading(true);
         try {
             const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, {
                 withCredentials: true,
@@ -30,6 +33,7 @@ const DeletePost = ({ postId: id }) => {
                     navigate('/');
                 }
             }
+            setIsloading(false);
         } catch (error) {
             console.log("Couldn't delete the post");
         }
