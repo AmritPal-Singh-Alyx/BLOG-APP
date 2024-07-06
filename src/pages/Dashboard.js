@@ -41,6 +41,10 @@ const Dashboard = () => {
         fetchPosts();
     }, [id])
 
+
+    if (isLoading) {
+        return <Loader />
+    }
     return (
         <section className='dashboard'>
             {
