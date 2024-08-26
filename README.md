@@ -9,9 +9,7 @@
 5. [Installation and Setup](#installation-and-setup)
 6. [API Endpoints](#api-endpoints)
 7. [Usage](#usage)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Acknowledgements](#acknowledgements)
+8. [Acknowledgements](#acknowledgements)
 
 ## Introduction
 
